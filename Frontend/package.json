@@ -15,6 +15,7 @@
     "sass-loader": "10"
   },
   "dependencies": {
-    "@nuxtjs/tailwindcss": "^6.6.6"
+    "@nuxtjs/tailwindcss": "^6.6.6",
+    "heroicons": "^2.0.17"
   }
 }
