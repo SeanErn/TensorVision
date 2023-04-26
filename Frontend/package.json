@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.6.6",
+    "flowbite": "^1.6.5",
     "heroicons": "^2.0.17"
   }
 }

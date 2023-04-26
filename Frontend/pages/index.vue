@@ -5,7 +5,10 @@
         <title>Home | Tensorflow Custom</title>
     </head>
     <ClientOnly>
+    <div class="flex flex-row gap-5">
     <CameraWrapper/>
+    <SelectorWrapper/>
+    </div> 
     </ClientOnly>
   </html>
   </template>
