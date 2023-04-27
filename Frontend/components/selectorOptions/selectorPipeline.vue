@@ -1,7 +1,12 @@
 <template>
-    <div class="rounded-md overflow-hidden relative w-1/2">
-        <div class="absolute bottom-0 w-full opacity-60 bg-stone-600 px-3 py-2 text-zinc-200 text-lg">
-            <h1>Pipeline: </h1>
+    <div class="relative w-full flex-col space-y-2">
+        <div class="w-full bg-zinc-700 px-3 py-2 text-zinc-200 text-lg rounded-md shadow-md">
+            <span>Pipeline: </span>
+        
+        </div>
+        <div class="w-full bg-zinc-700 px-3 py-2 text-zinc-200 text-lg rounded-md shadow-md">
+            <span>Model: </span>
+            <span>TEST</span>
         </div>
     </div>
 </template>

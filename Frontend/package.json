@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "^6.6.6",
+    "@types/socket.io-client": "^3.0.0",
     "flowbite": "^1.6.5",
-    "heroicons": "^2.0.17"
+    "heroicons": "^2.0.17",
+    "socket.io-client": "^4.6.1"
   }
 }
