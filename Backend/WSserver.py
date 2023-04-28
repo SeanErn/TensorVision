@@ -12,6 +12,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         response = self.handle_request(message)
+        print(message)
         self.write_message(response)
 
     def on_close(self):
