@@ -15,10 +15,15 @@
     "sass-loader": "10"
   },
   "dependencies": {
+    "@nuxtjs/composition-api": "^0.33.1",
     "@nuxtjs/tailwindcss": "^6.6.6",
     "@types/socket.io-client": "^3.0.0",
+    "@types/ws": "^8.5.4",
     "flowbite": "^1.6.5",
     "heroicons": "^2.0.17",
-    "socket.io-client": "^4.6.1"
+    "sails.io.js": "1.2.1",
+    "socket.io": "^4.6.1",
+    "socket.io-client": "2.2.0",
+    "ws": "^8.13.0"
   }
 }
