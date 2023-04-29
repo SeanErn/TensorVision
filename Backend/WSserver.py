@@ -2,6 +2,7 @@ import tornado.web
 import tornado.websocket
 import tornado.ioloop
 import utils
+import json
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def check_origin(self, origin):
@@ -23,10 +24,26 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         match message:
             case "getModels":
                 models = utils.getModels("../UserData/Models")
-                payload = ",".join(models)
+                stringified = ",".join(models)
+                data = {
+                    "type": "getModels",
+                    "data": {
+                        "code": "200",
+                        "models": stringified
+                        }
+                }
+                payload = json.dumps(data)
                 return payload
             case _ :
-                return "Unknown request"
+                data = {
+                    "type": "error",
+                    "data": {
+                        "code": "404",
+                        "message": "Invalid request"
+                    }
+                }
+                payload = json.dumps(data)
+                return payload
 
 def make_app():
     return tornado.web.Application([

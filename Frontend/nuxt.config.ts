@@ -6,7 +6,4 @@ export default defineNuxtConfig({
     css : [
         '~/assets/scss/default.scss'
     ],
-    plugins : [
-        '~/plugins/websocketHandler',
-    ]
 })
