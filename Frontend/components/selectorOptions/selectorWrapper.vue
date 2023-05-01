@@ -4,7 +4,7 @@
                 <span class="text-white font-bold text-2xl">Quick Settings</span>
             </div>
             <div class="flex space-x-10">
-                <SelectorModel/>
+                <SelectorPipeline/>
             </div>
 </div>
 </template>

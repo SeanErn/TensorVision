@@ -1,7 +1,8 @@
 import tornado.web
 import tornado.websocket
 import tornado.ioloop
-import utils
+import pipelines.pipelineGET as pipelineGET
+import pipelines.pipelineSET as pipelineSET
 import json
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
@@ -22,18 +23,10 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def handle_request(self, message):
         # Use a case statement to handle different requests
         match message:
-            case "getModels":
-                models = utils.getModels("../UserData/Models")
-                stringified = ",".join(models)
-                data = {
-                    "type": "getModels",
-                    "data": {
-                        "code": "200",
-                        "models": stringified
-                        }
-                }
-                payload = json.dumps(data)
-                return payload
+            case "getAllModelNames":
+                return pipelineGET.getAllModelNamesFormatted()
+            case "getAllPipelineData":
+                return pipelineGET.getAllPipelineDataFormatted()
             case _ :
                 data = {
                     "type": "error",

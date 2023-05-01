@@ -1,0 +1,9 @@
+{
+    "currentPipeline": "model1",
+    "networkConfig": {
+        "teamNumber": 0,
+        "hostname": "tensorflow",
+        "useStaticIP": false,
+        "staticIP": ""
+    }
+}

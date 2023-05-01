@@ -1,0 +1,20 @@
+{
+    "nickname": "default",
+    "cameraSettings": {
+        "cameraExposure": 1,
+        "cameraBrightness": 1,
+        "cameraAutoExposure": true,
+        "cameraRedGain": 3,
+        "cameraBlueGain": 4,
+        "inputImageRotationMode": 0
+    },
+
+    "pipelineSettings": {
+        "model": "model1",
+
+        "targetingOffsets": {
+            "yaw": 0,
+            "pitch": 0
+        }
+    }
+}
