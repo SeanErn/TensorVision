@@ -27,6 +27,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
                 return pipelineGET.getAllModelNamesFormatted()
             case "getAllPipelineData":
                 return pipelineGET.getAllPipelineDataFormatted()
+            case "getAllPipelineNames":
+                return pipelineGET.getAllPipelineNamesFormatted()
             case _ :
                 data = {
                     "type": "error",

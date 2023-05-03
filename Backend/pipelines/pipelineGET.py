@@ -37,11 +37,48 @@ def getAllModelNamesFormatted():
     return json.dumps({
         "type": "getAllModelNames",
         "data": {
-            "code": "200",
+            "code": 200,
             "models": getAllModelNames()
         }
     })
 
+
+# ------------------- #
+
+# Gets all models that will be used for the pipeline
+def getAllPipelineNames():
+    """
+    Gets all the files in a directory and removes the .tflite file extension.
+
+    Args:
+        directory (str): The directory to search for files.
+
+    Returns:
+        A list of file names for all the files in the directory without the .tflite extension.
+    """
+    pipeline_files = glob.glob(f"{PIPELINE_CONFIGS_DIR}/*.json")
+    files_without_json_extension = []
+    for pipeline_file in pipeline_files:
+        filename = os.path.basename(pipeline_file)
+        file_without_extension = os.path.splitext(filename)[0]
+        files_without_json_extension.append(file_without_extension)
+    return files_without_json_extension
+
+# Same as get all models but returns a JSON object
+def getAllPipelineNamesFormatted():
+    """
+    Gets all the files in a directory and removes the .tflite file extension.
+
+    Returns:
+        JSON payload for websocket with the type, code, and models
+    """
+    return json.dumps({
+        "type": "getAllPipelineNames",
+        "data": {
+            "code": 200,
+            "pipelines": getAllPipelineNames()
+        }
+    })
 
 # ------------------- #
 
@@ -79,7 +116,7 @@ def getAllPipelineDataFormatted():
     return json.dumps({
         "type": "getAllPipelineData",
         "data": {
-            "code": "200",
+            "code": 200,
             "models": getAllPipelineData()
         }
     })
