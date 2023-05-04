@@ -9,7 +9,11 @@ module.exports = {
     "./node_modules/flowbite.{js,ts}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        'dropdownGrid': '25% 1fr'
+      },
+    }
   },
   plugins: [
     require('flowbite/plugin')
