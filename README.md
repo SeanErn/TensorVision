@@ -1,9 +1,3 @@
-# TensorflowForCoprocessors
+# TensorVision
 A easy tool for running TF lite models and publishing the results to network tables for use with FRC robots.
-
-Potential names:
-- TensorPipe
-- TensorVision
-- TensorflowFRC
-- FlowVision
-- Suggest more in issues
+![tensorVisionLogo](https://user-images.githubusercontent.com/81441231/236598867-1bea0264-80c4-434e-81b9-274b600ee455.png)
