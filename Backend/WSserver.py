@@ -13,28 +13,43 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print("WebSocket opened")
 
     def on_message(self, message):
-        response = self.handle_request(message)
         print(message)
+        response = self.handle_request(message)
         self.write_message(response)
-
+        
     def on_close(self):
         print("WebSocket closed")
 
     def handle_request(self, message):
+        try:
+            type = json.loads(message)["type"]
+            print(type)
+        except:
+            data = {
+                "type": "error",
+                "code": "400",
+                "data": {
+                    "message": "Invalid JSON"
+                }
+            }
+            payload = json.dumps(data)
+            return payload
         # Use a case statement to handle different requests
-        match message:
+        match type:
             case "getAllModelNames":
                 return pipelineGET.getAllModelNamesFormatted()
             case "getAllPipelineData":
                 return pipelineGET.getAllPipelineDataFormatted()
             case "getAllPipelineNames":
                 return pipelineGET.getAllPipelineNamesFormatted()
+            case "getCurrentPipeline":
+                return pipelineGET.getCurrentPipelineFormatted()
             case _ :
                 data = {
                     "type": "error",
+                    "code": "404",
                     "data": {
-                        "code": "404",
-                        "message": "Invalid request"
+                        "message": "Invalid type"
                     }
                 }
                 payload = json.dumps(data)

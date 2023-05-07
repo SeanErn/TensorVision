@@ -1,0 +1,1 @@
+( cd ./Backend && python WSserver.py ) & ( cd ./Frontend && yarn dev )

@@ -1,1 +1,0 @@
-python ./Backend/WSserver.py & cd ./Frontend && yarn dev
