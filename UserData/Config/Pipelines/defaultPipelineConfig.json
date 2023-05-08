@@ -1,4 +1,5 @@
 {
+    "name": "defaultPipelineConfig",
     "cameraSettings": {
         "cameraExposure": 1,
         "cameraBrightness": 1,
