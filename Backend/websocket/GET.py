@@ -124,7 +124,7 @@ def getAllPipelineDataFormatted():
 # ------------------- #
 
 # Gets the current pipeline
-def getCurrentPipeline():
+def getCurrentPipelineName():
     """
     Gets the current pipeline from globalConfig.json
 
@@ -136,7 +136,7 @@ def getCurrentPipeline():
         return global_config["currentPipeline"]
 
 # Same as get current pipeline but returns a JSON object
-def getCurrentPipelineFormatted():
+def getCurrentPipelineNameFormatted():
     """
     Gets the current pipeline from globalConfig.json
     
@@ -147,6 +147,75 @@ def getCurrentPipelineFormatted():
         "type": "getCurrentPipeline",
         "code": 200,
         "data": {
-            "currentPipeline": getCurrentPipeline()
+            "currentPipeline": getCurrentPipelineName()
         }
     })
+
+# ------------------- #
+
+# Gets the current pipeline's data
+def getCurrentPipelineData():
+    """
+    Gets the current pipeline's data from globalConfig.json
+
+    Returns:
+        The current pipeline's data
+    """
+    try:
+        with open(const.GLOBAL_CONFIG_FILE, "r") as global_config_file:
+            global_config = json.load(global_config_file)
+            current_pipeline = global_config["currentPipeline"]
+            with open(f"{const.PIPELINE_CONFIGS_DIR}/{current_pipeline}.json", "r") as current_pipeline_file:
+                return json.load(current_pipeline_file)
+    except FileNotFoundError:
+        return {}
+
+# Same as get current pipeline data but returns a JSON object
+def getCurrentPipelineDataFormatted():
+    """
+    Gets the current pipeline's data from globalConfig.json
+
+    Returns:
+        JSON payload for websocket with the type, code, and current pipeline's data
+    """
+    return json.dumps({
+        "type": "getCurrentPipelineData",
+        "code": 200,
+        "data": {
+            "currentPipelineData": getCurrentPipelineData()
+        }
+    })
+
+# ------------------- #
+
+# Gets the current pipeline's model
+def getCurrentPipelineModel():
+    """
+    Gets the current pipeline's model from globalConfig.json
+
+    Returns:
+        The current pipeline's model
+    """
+    with open(const.GLOBAL_CONFIG_FILE, "r") as global_config_file:
+        global_config = json.load(global_config_file)
+        current_pipeline = global_config["currentPipeline"]
+        with open(f"{const.PIPELINE_CONFIGS_DIR}/{current_pipeline}.json", "r") as current_pipeline_file:
+            return json.load(current_pipeline_file)["model"]
+        
+# Same as get current pipeline model but returns a JSON object
+def getCurrentPipelineModelFormatted():
+    """
+    Gets the current pipeline's model from globalConfig.json
+
+    Returns:
+        JSON payload for websocket with the type, code, and current pipeline's model
+    """
+    return json.dumps({
+        "type": "getCurrentPipelineModel",
+        "code": 200,
+        "data": {
+            "currentPipelineModel": getCurrentPipelineModel()
+        }
+    })
+
+# ------------------- #

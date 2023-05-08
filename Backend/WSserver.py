@@ -1,9 +1,10 @@
 import tornado.web
 import tornado.websocket
 import tornado.ioloop
-import pipelines.pipelineGET as pipelineGET
-import pipelines.pipelineSET as pipelineSET
+import websocket.GET as wsGET
+import websocket.SET as wsSET
 import json
+import websocket.status as wsStatus
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def check_origin(self, origin):
@@ -25,35 +26,25 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             type = json.loads(message)["type"]
             print(type)
         except:
-            data = {
-                "type": "error",
-                "code": "400",
-                "data": {
-                    "message": "Invalid JSON"
-                }
-            }
-            payload = json.dumps(data)
-            return payload
+            return wsStatus.failedParseRequest()
         # Use a case statement to handle different requests
         match type:
             case "getAllModelNames":
-                return pipelineGET.getAllModelNamesFormatted()
-            case "getAllPipelineData":
-                return pipelineGET.getAllPipelineDataFormatted()
+                return wsGET.getAllModelNamesFormatted()
             case "getAllPipelineNames":
-                return pipelineGET.getAllPipelineNamesFormatted()
-            case "getCurrentPipeline":
-                return pipelineGET.getCurrentPipelineFormatted()
+                return wsGET.getAllPipelineNamesFormatted()
+            case "getCurrentPipelineName":
+                return wsGET.getCurrentPipelineNameFormatted()
+            case "getCurrentPipelineData":
+                return wsGET.getCurrentPipelineDataFormatted()
+            case "setCurrentPipelineName":
+                try:
+                    wsSET.setCurrentPipelineName(json.loads(message)["data"]["pipelineName"])
+                except:
+                    return wsStatus.failedParseRequest()
+                return wsStatus.ok()
             case _ :
-                data = {
-                    "type": "error",
-                    "code": "404",
-                    "data": {
-                        "message": "Invalid type"
-                    }
-                }
-                payload = json.dumps(data)
-                return payload
+                return wsStatus.failedParseType()
 
 def make_app():
     return tornado.web.Application([
