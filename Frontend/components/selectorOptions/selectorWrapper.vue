@@ -3,8 +3,9 @@
             <div class="py-2">
                 <span class="text-white font-bold text-2xl">Quick Settings</span>
             </div>
-            <div class="flex space-x-10">
+            <div class="flex-column space-y-2">
                 <SelectorPipeline/>
+                <SelectorMinConfidence/>
             </div>
 </div>
 </template>

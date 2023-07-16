@@ -5,5 +5,7 @@ setup(name='tfForCo_Backend',
       description='Backend for tfForCo',
       setup_requires=[
         'tornado',
+        'opencv-python',
+        'tensorflow'
       ]
 )

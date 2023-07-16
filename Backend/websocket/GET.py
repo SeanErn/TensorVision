@@ -7,26 +7,21 @@ import constants as const
 # Gets all models that will be used for the pipeline
 def getAllModelNames():
     """
-    Gets all the files in a directory and removes the .tflite file extension.
+    Gets all the folders in a directory
 
     Args:
-        directory (str): The directory to search for files.
+        directory (str): The directory to search for folders.
 
     Returns:
-        A list of file names for all the files in the directory without the .tflite extension.
+        A list of file names for all the folders
     """
-    tflite_files = glob.glob(f"{const.MODELS_DIR}/*.tflite")
-    files_without_tflite_extension = []
-    for tflite_file in tflite_files:
-        filename = os.path.basename(tflite_file)
-        file_without_extension = os.path.splitext(filename)[0]
-        files_without_tflite_extension.append(file_without_extension)
-    return files_without_tflite_extension
+    subfolders = [ f.name for f in os.scandir("UserData/Models/") if f.is_dir() ]
+    return subfolders
 
 # Same as get all models but returns a JSON object
 def getAllModelNamesFormatted():
     """
-    Gets all the files in a directory and removes the .tflite file extension.
+    Gets all the folders in a directory
 
     Returns:
         JSON payload for websocket with the type, code, and models
@@ -45,13 +40,13 @@ def getAllModelNamesFormatted():
 # Gets all models that will be used for the pipeline
 def getAllPipelineNames():
     """
-    Gets all the files in a directory and removes the .tflite file extension.
+    Gets all the files in a directory and removes the .json file extension.
 
     Args:
         directory (str): The directory to search for files.
 
     Returns:
-        A list of file names for all the files in the directory without the .tflite extension.
+        A list of file names for all the files in the directory without the .json extension.
     """
     pipeline_files = glob.glob(f"{const.PIPELINE_CONFIGS_DIR}/*.json")
     files_without_json_extension = []
@@ -64,7 +59,7 @@ def getAllPipelineNames():
 # Same as get all models but returns a JSON object
 def getAllPipelineNamesFormatted():
     """
-    Gets all the files in a directory and removes the .tflite file extension.
+    Gets all the files in a directory and removes the .json file extension.
 
     Returns:
         JSON payload for websocket with the type, code, and models

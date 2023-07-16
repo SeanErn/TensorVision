@@ -3,6 +3,7 @@ import glob
 import os
 import json
 import constants as const
+import websocket.GET as wsGET
 
 # Set the current pipeline in globalConfig.json
 def setCurrentPipelineName(pipeline_name):
@@ -18,3 +19,12 @@ def setCurrentPipelineName(pipeline_name):
         global_config["currentPipeline"] = pipeline_name
     with open(const.GLOBAL_CONFIG_FILE, "w") as global_config_file:
         json.dump(global_config, global_config_file, indent=4)
+
+def setCurrentPipelineMinConfidence(confidence_value):
+    """
+    Sets the current pipeline's minimum confidence level for the model selected.
+
+    Args:
+        confidence_value (float): The minimum confidence for it to be counted as a detection
+    """
+    wsGET.getCurrent
