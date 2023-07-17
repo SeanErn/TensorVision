@@ -6,6 +6,7 @@ setup(name='tfForCo_Backend',
       setup_requires=[
         'tornado',
         'opencv-python',
-        'tensorflow'
+        'tensorflow',
+        'PyMongo'
       ]
 )

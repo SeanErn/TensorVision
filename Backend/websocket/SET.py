@@ -27,4 +27,4 @@ def setCurrentPipelineMinConfidence(confidence_value):
     Args:
         confidence_value (float): The minimum confidence for it to be counted as a detection
     """
-    wsGET.getCurrent
+    
