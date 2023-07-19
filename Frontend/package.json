@@ -19,11 +19,15 @@
     "@nuxtjs/tailwindcss": "^6.6.6",
     "@types/socket.io-client": "^3.0.0",
     "@types/ws": "^8.5.4",
+    "axios": "^1.4.0",
     "flowbite": "^1.6.5",
+    "fs-extra": "^11.1.1",
     "heroicons": "^2.0.17",
+    "nuxt-mongoose": "^0.0.9",
     "sails.io.js": "1.2.1",
     "socket.io": "^4.6.1",
     "socket.io-client": "2.2.0",
+    "vue-upload-component": "^2.8.23",
     "ws": "^8.13.0"
   }
 }

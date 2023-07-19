@@ -1,0 +1,17 @@
+tensorflow_gpu==1.14
+opencv-contrib-python
+protobuf==3.20.*
+keras==2.2.5
+pillow
+lxml
+matplotlib
+contextlib2
+tf-slim
+six
+pycocotools
+lvis
+scipy
+pandas
+cython
+oldest-supported-numpy
+numpy
