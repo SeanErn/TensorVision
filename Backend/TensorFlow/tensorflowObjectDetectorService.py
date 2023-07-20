@@ -1,4 +1,5 @@
 # Import packages
+import json
 import os
 import cv2
 import numpy as np
@@ -8,7 +9,7 @@ from object_detection.utils import visualization_utils as vis_util
 from multiprocessing import Queue
 import targetInfo
 
-def createObjectDetector(PROCESSED_FRAME_QUEUE: Queue, RAW_FRAME_QUEUE: Queue, RES_QUEUE: Queue, MODEL_DIR: str, NUMBER_CLASSES: int, VIDEO_DEVICE_NUMBER: int, MIN_CONF: float, GUI_ENABLED: bool):
+def createObjectDetector(PROCESSED_FRAME_QUEUE: Queue, RAW_FRAME_QUEUE: Queue, RES_QUEUE: Queue, TARGET_INFO_QUEUE: Queue, MODEL_DIR: str, NUMBER_CLASSES: int, VIDEO_DEVICE_NUMBER: int, MIN_CONF: float, GUI_ENABLED: bool):
     
     MODEL_NAME = MODEL_DIR # MODEL_DIR
     GRAPH_NAME = "detect.tflite"
@@ -93,6 +94,9 @@ def createObjectDetector(PROCESSED_FRAME_QUEUE: Queue, RAW_FRAME_QUEUE: Queue, R
         num = interpreter.get_tensor(output_details[3]['index'])[0]  # Total number of detected objects (inaccurate and
         # not needed)
 
+        # Create array to store targetInfo data
+        targetInfoArray = []
+        
         # Loop over all detections and draw detection box if confidence is above minimum threshold
         for i in range(len(scores)):
             if ((scores[i] > min_conf_threshold) and (scores[i] <= 1.0)):
@@ -132,6 +136,23 @@ def createObjectDetector(PROCESSED_FRAME_QUEUE: Queue, RAW_FRAME_QUEUE: Queue, R
                 cv2.drawMarker(frame, midpoint, (10, 255, 0), thickness=2, markerSize=40, markerType= cv2.MARKER_CROSS)
                 
                 # print("estimatedPitch: "+str(estimatedPitch)+", estimatedYaw: "+str(estimatedYaw)+", estimatedArea: "+str(estimatedArea))
+                
+                detectionInfo = {
+                "TARGET_NUM": int(i),
+                "class": object_name,
+                "confidence": int(scores[i] * 100),
+                "pitch": estimatedPitch,
+                "yaw": estimatedYaw,
+                "area": estimatedArea,
+                "boundingBox": [xmin, xmax, ymin, ymax],
+                "center": midpoint
+                }
+
+                targetInfoArray.append(detectionInfo)
+        
+        # send target info
+        TARGET_INFO_QUEUE.put(targetInfoArray)
+        
         # stream frame to pipe      
         PROCESSED_FRAME_QUEUE.put(frame)
         
