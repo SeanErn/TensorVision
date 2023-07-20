@@ -15,11 +15,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { initFlowbite } from 'flowbite';
+
 
 // initialize components based on data attribute selectors
 onMounted(() => {
-    initFlowbite();
+
 })
 
 const socket = new WebSocket("ws://127.0.0.1:5000");
