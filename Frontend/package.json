@@ -22,9 +22,11 @@
     "@types/ws": "^8.5.4",
     "daisyui": "^3.2.1",
     "heroicons": "^2.0.17",
+    "nuxt-mongoose": "^0.0.9",
     "sails.io.js": "1.2.1",
     "socket.io": "^4.6.1",
     "socket.io-client": "2.2.0",
+    "vue-upload-component": "^2.8.23",
     "ws": "^8.13.0"
   }
 }
