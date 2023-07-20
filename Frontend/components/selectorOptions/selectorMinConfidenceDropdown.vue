@@ -1,25 +1,26 @@
 <template>
-<div class="relative">
-  <button id="selectorMinConfidenceDropdownBtn" ref="selectorMinConfidenceDropdownBtn" data-dropdown-toggle="selectorMinConfidenceDropdownMenu" data-dropdown-trigger="click" data-dropdown-delay="750" class=" w-full text-white focus:ring-zinc-400 focus:ring-2 focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 flex justify-between items-center bg-zinc-800 hover:bg-zinc-900" type="button">Minimum Model Confidence <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+<div class="relative ">
+
   <!-- Dropdown menu -->
-  <div id="selectorMinConfidenceDropdownMenu" ref="selectorMinConfidenceDropdownMenu" class="z-10 hidden divide-y divide-gray-100 rounded-lg shadow bg-zinc-900 w-full">
-    <ul class="h-44 py-2 text-sm text-gray-200 overflow-y-auto transition-opacity overflow-x-clip" aria-labelledby="dropdownDefaultButton">
-      <li v-for="(value, index) in pipelineNames" :key="index">
-        <a href="#" class="block px-4 py-2  hover:bg-gray-600 hover:text-white text-ellipsis" @click="updateButton(value)">{{ value }}</a>
-      </li>
-    </ul>
-  </div>
+  <!-- Min confidence 0.0-1.0 Float  -->
+
+  <div class="p-2 bg-base-300 justify-center flex rounded-md min-w-full my-2">
+    <input type="range" min="0.0" max="1.0" step="0.01" v-model="confidence" class="range range-primary p-0" />
+    <input type="text" class="ml-2 w-16 text-center" v-model="confidence" />
+    
+  </div>  
 </div>
 
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { initFlowbite } from 'flowbite';
+
+
+const confidence = ref(0.5);
 
 // initialize components based on data attribute selectors
 onMounted(() => {
-    initFlowbite();
 })
 
 const socket = new WebSocket("ws://127.0.0.1:5000");

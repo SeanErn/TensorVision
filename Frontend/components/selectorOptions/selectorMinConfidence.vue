@@ -1,8 +1,8 @@
 <template>
-    <div class="grid grid-cols-dropdownGrid content-between w-full bg-zinc-700 px-3 py-2 text-zinc-200 text-lg rounded-md shadow-md">
-        <span class="flex items-center">Minimum Confidence: </span>
+    <div class="content-between w-full bg-base-100 px-3 py-2 text-lg rounded-md shadow-md">
+        <span class="">Minimum Confidence: </span>
         <ClientOnly>
-            <SelectorMinConfidenceDropdown/>
+            <SelectorOptionsSelectorMinConfidenceDropdown/>
         </ClientOnly>
     </div>
 </template>
