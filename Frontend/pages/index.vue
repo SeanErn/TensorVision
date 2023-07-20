@@ -6,7 +6,7 @@
         <title>Home | Tensorflow Custom</title>
     </head>
     <ClientOnly>
-    <div class="m-4 gap-4 lg:grid grid-cols-4 grid-rows-2 flex flex-col justify-center items-center">
+    <div class="m-4 gap-4 lg:grid grid-cols-4 grid-rows-2 flex flex-col justify-center items-center auto-rows-min">
     <CameraStreamsCameraWrapper class="xl:col-span-3 col-span-4 w-full max-lg:my-2"/>
     <SelectorOptionsQuickSettings class="col-span-2 xl:col-span-1 max-lg:my-2"/>
     <InputOutput class="col-span-2  max-lg:my-2"/>
