@@ -1,6 +1,6 @@
 <template>
-<div class="flex h-screen w-screen" data-theme="alotobots">
-   <aside id="default-sidebar"
+<div class="flex max-h-screen max-w-screen" data-theme="alotobots">
+   <aside id="default-sidebar sticky"
       class="z-40 h-screen overflow-visible"
       aria-label="Sidebar">
       <div class="h-full px-3 py-4 bg-zinc-800 shadow-xl flex flex-col">
@@ -55,6 +55,8 @@
 
       </div>
    </aside>
+   <div class="overflow-x-scroll bg-zinc-900 ">
    <slot/>
+</div>
 </div>
 </template>

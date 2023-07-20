@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex-grow">
+  <div class="relative flex-grow ">
 
     <!-- Dropdown menu -->
     <select class="select select-bordered bg-base-300 my-2 min-w-full">
@@ -8,7 +8,7 @@
     </select>
   </div>
 </template>
-<!-- TODO: Fix this to do models instead of pipelines -->
+<!-- TODO: Fix this to do cameras instead of pipelines -->
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 
