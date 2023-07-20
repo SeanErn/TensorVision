@@ -8,7 +8,7 @@ from object_detection.utils import visualization_utils as vis_util
 from multiprocessing import Queue
 import targetInfo
 
-def createObjectDetector(FRAME_QUEUE: Queue, RES_QUEUE: Queue, MODEL_DIR: str, NUMBER_CLASSES: int, VIDEO_DEVICE_NUMBER: int, MIN_CONF: float, GUI_ENABLED: bool):
+def createObjectDetector(PROCESSED_FRAME_QUEUE: Queue, RAW_FRAME_QUEUE: Queue, RES_QUEUE: Queue, MODEL_DIR: str, NUMBER_CLASSES: int, VIDEO_DEVICE_NUMBER: int, MIN_CONF: float, GUI_ENABLED: bool):
     
     MODEL_NAME = MODEL_DIR # MODEL_DIR
     GRAPH_NAME = "detect.tflite"
@@ -75,6 +75,9 @@ def createObjectDetector(FRAME_QUEUE: Queue, RES_QUEUE: Queue, MODEL_DIR: str, N
         # Draw a crosshair into the center of the screen. TODO: allow offset points set by users
         cv2.drawMarker(frame, imMidpoint, (200, 60, 65), thickness=2, markerSize=40, markerType= cv2.MARKER_CROSS)
         
+        # stream raw frame to pipe
+        RAW_FRAME_QUEUE.put(frame)
+        
         # Normalize pixel values if using a floating model (i.e. if model is non-quantized)
         if floating_model:
             input_data = (np.float32(input_data) - input_mean) / input_std
@@ -128,9 +131,9 @@ def createObjectDetector(FRAME_QUEUE: Queue, RES_QUEUE: Queue, MODEL_DIR: str, N
                 # Draw crosshair into center of object
                 cv2.drawMarker(frame, midpoint, (10, 255, 0), thickness=2, markerSize=40, markerType= cv2.MARKER_CROSS)
                 
-                print("estimatedPitch: "+str(estimatedPitch)+", estimatedYaw: "+str(estimatedYaw)+", estimatedArea: "+str(estimatedArea))
+                # print("estimatedPitch: "+str(estimatedPitch)+", estimatedYaw: "+str(estimatedYaw)+", estimatedArea: "+str(estimatedArea))
         # stream frame to pipe      
-        FRAME_QUEUE.put(frame)
+        PROCESSED_FRAME_QUEUE.put(frame)
         
         if GUI_ENABLED:
             # All the results have been drawn on the frame, so it's time to display it.
