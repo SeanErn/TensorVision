@@ -6,6 +6,7 @@ import tensorflow as tf
 from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
 from multiprocessing import Queue
+import targetInfo
 
 def createObjectDetector(FRAME_QUEUE: Queue, RES_QUEUE: Queue, MODEL_DIR: str, NUMBER_CLASSES: int, VIDEO_DEVICE_NUMBER: int, MIN_CONF: float, GUI_ENABLED: bool):
     
@@ -69,6 +70,11 @@ def createObjectDetector(FRAME_QUEUE: Queue, RES_QUEUE: Queue, MODEL_DIR: str, N
         frame_resized = cv2.resize(frame_rgb, (width, height))
         input_data = np.expand_dims(frame_resized, axis=0)
 
+        # Calculate the center of the video
+        imMidpoint = (int(imW / 2), int(imH / 2))
+        # Draw a crosshair into the center of the screen. TODO: allow offset points set by users
+        cv2.drawMarker(frame, imMidpoint, (200, 60, 65), thickness=2, markerSize=40, markerType= cv2.MARKER_CROSS)
+        
         # Normalize pixel values if using a floating model (i.e. if model is non-quantized)
         if floating_model:
             input_data = (np.float32(input_data) - input_mean) / input_std
@@ -106,6 +112,23 @@ def createObjectDetector(FRAME_QUEUE: Queue, RES_QUEUE: Queue, MODEL_DIR: str, N
                               cv2.FILLED)  # Draw white box to put label text in
                 cv2.putText(frame, label, (xmin, label_ymin - 7), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0),
                             2)  # Draw label text
+                
+                # Calculate midpoint
+                midpoint = targetInfo.calculateMidpoint((xmax, ymax), (xmin, ymin))
+
+                # Calculate pitch
+                estimatedPitch = targetInfo.calculatePitch((imW, imH), 70, (midpoint[0], midpoint[1]))
+                
+                # Calculate yaw
+                estimatedYaw = targetInfo.calculateYaw((imW, imH), 70, (midpoint[0], midpoint[1]))
+                
+                # Calculate area
+                estimatedArea = targetInfo.calculateArea((imW, imH), (xmax, ymax), (xmin, ymin))
+                
+                # Draw crosshair into center of object
+                cv2.drawMarker(frame, midpoint, (10, 255, 0), thickness=2, markerSize=40, markerType= cv2.MARKER_CROSS)
+                
+                print("estimatedPitch: "+str(estimatedPitch)+", estimatedYaw: "+str(estimatedYaw)+", estimatedArea: "+str(estimatedArea))
         # stream frame to pipe      
         FRAME_QUEUE.put(frame)
         
