@@ -10,6 +10,7 @@
     <CameraStreamsCameraWrapper class="xl:col-span-3 col-span-4 w-full max-lg:my-2"/>
     <SelectorOptionsQuickSettings class="col-span-2 xl:col-span-1 max-lg:my-2"/>
     <InputOutput class="col-span-2  max-lg:my-2"/>
+    <TargetInfo class="col-span-2  max-lg:my-2"/>
     </div> 
     </ClientOnly>
   </html>
