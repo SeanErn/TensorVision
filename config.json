@@ -1,0 +1,10 @@
+{
+    "ports": {
+        "dash": 5800,
+        "cameraStreams": 5801,
+        "targetInfoWS": 5802,
+        "b-fConfigWS": 5803,
+        "fileUploadDownloadWS": 5804,
+        "mongodb": 5805
+    }
+}
