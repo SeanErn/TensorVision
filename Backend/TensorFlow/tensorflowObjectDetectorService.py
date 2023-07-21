@@ -124,13 +124,13 @@ def createObjectDetector(PROCESSED_FRAME_QUEUE: Queue, RAW_FRAME_QUEUE: Queue, R
                 midpoint = targetInfo.calculateMidpoint((xmax, ymax), (xmin, ymin))
 
                 # Calculate pitch
-                estimatedPitch = targetInfo.calculatePitch((imW, imH), 70, (midpoint[0], midpoint[1]))
+                estimatedPitch = round(targetInfo.calculatePitch((imW, imH), 70, (midpoint[0], midpoint[1])), 2)
                 
                 # Calculate yaw
-                estimatedYaw = targetInfo.calculateYaw((imW, imH), 70, (midpoint[0], midpoint[1]))
+                estimatedYaw = round(targetInfo.calculateYaw((imW, imH), 70, (midpoint[0], midpoint[1])), 2)
                 
                 # Calculate area
-                estimatedArea = targetInfo.calculateArea((imW, imH), (xmax, ymax), (xmin, ymin))
+                estimatedArea = round(targetInfo.calculateArea((imW, imH), (xmax, ymax), (xmin, ymin)), 2)
                 
                 # Draw crosshair into center of object
                 cv2.drawMarker(frame, midpoint, (10, 255, 0), thickness=2, markerSize=40, markerType= cv2.MARKER_CROSS)
