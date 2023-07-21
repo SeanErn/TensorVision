@@ -15,7 +15,7 @@
             </div>
             <div class="">
                 <HomeInputOutputDropdowns />
-                <HomeInputOutputCheckbox title="Show Multiple Targets"/>
+                <!-- <HomeInputOutputCheckbox title="Show Multiple Targets"/> -->
                 <HomeInputOutputButtons />
             </div>
         </div>
