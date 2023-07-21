@@ -1,5 +1,5 @@
 <template>
-    <div class="relative flex-grow rounded-md p-3 bg-base-200 max-w-full mb-auto max-2xl:h-1/2 ">
+    <div class="relative flex-grow rounded-md p-3 bg-base-200 max-w-full mb-auto">
         <h1 class="p-2 font-bold text-2xl">Target Info</h1>
         <div class="overflow-x-auto">
             <table class="table table-zebra bg-base-100 rounded-md">
