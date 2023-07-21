@@ -1,4 +1,5 @@
 import math
+from multiprocessing import Queue
 
 def calculateMidpoint(target_top_left_xy: tuple, target_bottom_right_xy: tuple):
     tl = target_top_left_xy
@@ -48,3 +49,44 @@ def calculateArea(image_wh: tuple, target_top_left_xy: tuple, target_bottom_righ
     box_percentage = (box_area / frame_area) * 100
     
     return box_percentage
+
+import asyncio
+import websockets
+import json
+
+def createInfoWsStream(TARGET_INFO_QUEUE: Queue,  PORT: int):
+    """Create a websocket server to stream detection info to the server.
+
+    Args:
+        DETECTION_INFO (Queue): The queue containing the array of json with each target's info
+        PORT (int): The port to run the server on
+    """
+    # This set will store all connected clients
+    connected_clients = set()
+
+    async def handle_client(websocket, path):
+        # When a client connects, we add it to the set
+        connected_clients.add(websocket)
+    
+        try:
+            # Main loop for each connection
+            while True:
+                message = json.dumps({
+                    "type": "targetInfo",
+                    "code": 200,
+                    "data": TARGET_INFO_QUEUE.get()})
+                
+                # The main logic of the server:
+                # send the message to the client
+                print(str(message))
+                await websocket.send(message)
+                # Wait for 1 second before sending the next message
+                await asyncio.sleep(1)
+        except websockets.exceptions.ConnectionClosed:
+            # If the client disconnects, we remove it from the set
+            connected_clients.remove(websocket)
+
+    start_server = websockets.serve(handle_client, 'localhost', PORT)
+
+    asyncio.get_event_loop().run_until_complete(start_server)
+    asyncio.get_event_loop().run_forever()
