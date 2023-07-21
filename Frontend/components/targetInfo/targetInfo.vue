@@ -29,7 +29,6 @@
 
     </div>
 </template>
-  <!-- TODO: Fix this to do cameras instead of pipelines -->
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 
@@ -38,7 +37,6 @@ onMounted(() => {
 })
 
 const socket = new WebSocket("ws://127.0.0.1:5000");
-const pipelineNames = ref<string[]>([]);
 const targets = ref<{ targetNumber: number, class: string, confidence: number, pitch: number, yaw: number, area: number }[]>([{ targetNumber: 0, class: 'N/A', confidence: 0, pitch: 0, yaw: 0, area: 0 }]);
 
 socket.addEventListener("message", (event) => {
@@ -48,7 +46,7 @@ socket.addEventListener("message", (event) => {
     switch (parsed.type) {
         case "targetInfo":
             targets.value = parsed.data;
-            console.log(`Models: ${pipelineNames.value}`);
+            console.log(`Models: ${targets.value}`);
             break;
         default:
             console.error(`Unknown message type: ${parsed.type} with data: ${parsed.data}`)
