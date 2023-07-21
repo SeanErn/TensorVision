@@ -55,7 +55,7 @@
 
       </div>
    </aside>
-   <div class="overflow-x-scroll bg-zinc-900 ">
+   <div class="overflow-x-scroll bg-zinc-900 flex-grow">
    <slot/>
 </div>
 </div>
