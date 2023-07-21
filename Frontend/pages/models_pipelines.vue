@@ -6,11 +6,11 @@
         <title>Tensor Vision - Pipelines & Models</title>
     </head>
     <ClientOnly>
-    <div class="m-4 gap-4 flex max-lg:flex-col justify-center items-center auto-rows-min w-full">
-      <div>
+    <div class="m-4 gap-4 lg:grid grid-cols-4 flex flex-col justify-center items-center auto-rows-min">
+      <div class="col-span-2 w-full">
         <ModelsPipelinesModelsModel/>
       </div>
-      <div>
+      <div class="col-span-2 w-full">
         <ModelsPipelinesPipelines/>
       </div>
     </div> 
