@@ -2,7 +2,7 @@ import tornado.web
 import tornado.websocket
 import tornado.ioloop
 import websocket.GET as wsGET
-import websocket.SET as wsSET
+import websocket.UPDATE as wsUPDATE
 import json
 import websocket.status as wsStatus
 
@@ -24,27 +24,18 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
     def handle_request(self, message):
         try:
             type = json.loads(message)["type"]
+            data = json.loads(message)["data"]
             print(type)
+            print(data)
         except:
             return wsStatus.failedParseRequest()
         # Use a case statement to handle different requests
-        match type:
-            case "getAllModelNames":
-                return wsGET.getAllModelNamesFormatted()
-            case "getAllPipelineNames":
-                return wsGET.getAllPipelineNamesFormatted()
-            case "getCurrentPipelineName":
-                return wsGET.getCurrentPipelineNameFormatted()
-            case "getCurrentPipelineData":
-                return wsGET.getCurrentPipelineDataFormatted()
-            case "setCurrentPipelineName":
-                try:
-                    wsSET.setCurrentPipelineName(json.loads(message)["data"]["pipelineName"])
-                except:
-                    return wsStatus.failedParseRequest()
-                return wsStatus.ok()
-            case _ :
-                return wsStatus.failedParseType()
+        if type == "updateCameraExposure":
+            return wsUPDATE.updateCameraExposure(data)
+        elif type == "getCameraDevice":
+            return wsGET.getCameraDevice(data)
+        else:
+            return wsStatus.failedParseType()
 
 def make_app():
     return tornado.web.Application([
@@ -53,5 +44,5 @@ def make_app():
 
 if __name__ == "__main__":
     app = make_app()
-    app.listen(5000)
+    app.listen(5803)
     tornado.ioloop.IOLoop.current().start()

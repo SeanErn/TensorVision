@@ -34,20 +34,18 @@ print("Imported global config")
 
 # Import 2024 pretrained pipeline from JSON
 pretrainedPipeline = {
-    "name": "default",
+    "pipelineName": "default",
     "cameraSettings": {
-        "cameraDevice": 0,
-        "cameraExposure": 1,
-        "cameraBrightness": 1,
-        "cameraAutoExposure": True,
-        "cameraRedGain": 3,
-        "cameraBlueGain": 4,
+        "device": 0,
+        "exposure": 1,
+        "brightness": 1,
+        "autoExposure": True,
         "inputImageRotationMode": 0
     },
 
     "pipelineSettings": {
         "model": "default",
-        "minimumConfidence": "0.8",
+        "minimumConfidence": 0.8,
 
         "targetingOffsets": {
             "yaw": 0,
@@ -61,20 +59,18 @@ print("Imported pretrained pipeline")
 
 # Import default pipeline example from JSON
 defaultPipelineConfig = {
-    "name": "defaultPipelineConfig",
+    "pipelineName": "defaultPipelineConfig",
     "cameraSettings": {
-        "cameraDevice": 0,
-        "cameraExposure": 1,
-        "cameraBrightness": 1,
-        "cameraAutoExposure": True,
-        "cameraRedGain": 3,
-        "cameraBlueGain": 4,
+        "device": 0,
+        "exposure": 1,
+        "brightness": 1,
+        "autoExposure": True,
         "inputImageRotationMode": 0
     },
 
     "pipelineSettings": {
-        "model": "model1",
-        "minimumConfidence": "0.8",
+        "model": "detect",
+        "minimumConfidence": 0.8,
 
         "targetingOffsets": {
             "yaw": 0,
