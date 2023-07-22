@@ -1,3 +1,9 @@
+# TODO:
+# ✓ Finish postman api docs
+# Finish CREATE functions
+# Add notifications from server to client when the data on backend is updated
+# Attach to frontend
+
 import tornado.web
 import tornado.websocket
 import tornado.ioloop
@@ -28,6 +34,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             return wsStatus.failedParseRequest()
         # Use a case statement to handle different requests
         # GET
+        # pipelines
         if type == "getCameraDevice":
             return getCameraDevice(data)
         elif type == "getCameraExposure":
@@ -46,10 +53,24 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             return getYaw(data)
         elif type == "getPitch":
             return getPitch(data)
-        elif type == "getAll":
-            return getAll(data)
+        elif type == "getPipelineConfig":
+            return getPipelineConfig(data)
+        # globalConfigs
+        elif type == "getCurrentPipeline":
+            return getCurrentPipeline()
+        elif type == "getTeamNumber":
+            return getTeamNumber()
+        elif type == "getHostname":
+            getHostname()
+        elif type == "getUseStaticIP":
+            getUseStaticIP()
+        elif type == "getStaticIP":
+            getStaticIP()
+        elif type == "getGlobalConfig":
+            getGlobalConfig()
         
         # UPDATE
+        # pipelines
         elif type == "updateCameraDevice":
             return updateCameraDevice(data)
         elif type == "updateCameraExposure":
@@ -68,8 +89,19 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             return updateYaw(data)
         elif type == "updatePitch":
             return updatePitch(data)
-        elif type == "getCurrentPipeline":
-            return getCurrentPipeline()
+        # globalConfigs
+        elif type == "updateCurrentPipeline":
+            updateCurrentPipeline(data)
+        elif type == "updateTeamNumber":
+            updateTeamNumber(data)
+        elif type == "updateHostname":
+            updateHostname(data)
+        elif type == "updateUseStaticIP":
+            updateUseStaticIP(data)
+        elif type == "updateStaticIP":
+            updateStaticIP(data)
+        
+        # errors
         else:
             return status.failedParseType()
 
