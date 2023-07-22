@@ -1,3 +1,9 @@
+# TODO:
+# Finish postman api docs
+# Finish CREATE functions
+# Add notifications from server to client when the data on backend is updated
+# Attach to frontend
+
 import tornado.web
 import tornado.websocket
 import tornado.ioloop
@@ -56,10 +62,10 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             return getTeamNumber()
         elif type == "getHostname":
             getHostname()
-        elif type == "getUseStaticIp":
-            getUseStaticIp()
-        elif type == "getStaticIp":
-            getStaticIp()
+        elif type == "getUseStaticIP":
+            getUseStaticIP()
+        elif type == "getStaticIP":
+            getStaticIP()
         elif type == "getGlobalConfig":
             getGlobalConfig()
         
@@ -83,6 +89,17 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             return updateYaw(data)
         elif type == "updatePitch":
             return updatePitch(data)
+        # globalConfigs
+        elif type == "updateCurrentPipeline":
+            updateCurrentPipeline(data)
+        elif type == "updateTeamNumber":
+            updateTeamNumber(data)
+        elif type == "updateHostname":
+            updateHostname(data)
+        elif type == "updateUseStaticIP":
+            updateUseStaticIP(data)
+        elif type == "updateStaticIP":
+            updateStaticIP(data)
         
         # errors
         else:

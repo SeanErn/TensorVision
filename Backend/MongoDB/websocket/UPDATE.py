@@ -61,9 +61,65 @@ def updateYaw(data: json):
     return status.ok()
 
 def updatePitch(data: json):
-    pipelineName = data.pipelineName
+    pipelineName = data["pipelineName"]
     pitch = data["pitch"]
     pipelines.find_one_and_update({"pipelineName": pipelineName}, {'$set': {'pipelineSettings.targetingOffsets.pitch': pitch}})
+    return status.ok()
+
+# -----------------------------------------------------------------------------------------------------------------------------------------
+
+# global
+def updateCurrentPipeline(data: json):
+    """Update the current pipeline in the global config
+
+    Returns:
+        status: ok (see postman for example)
+    """
+    pipelineName = data["pipelineName"]
+    globalConfigs.find_one_and_update({}, {'$set': {'currentPipeline': pipelineName}})
+    return status.ok()
+
+# -----------------------------------------------------------------------------------------------------------------------------------------
+
+# networkConfig
+def updateTeamNumber(data: json):
+    """Update the current team number in the global config
+
+    Returns:
+        status: ok (see postman for example)
+    """
+    teamNumber = data["teamNumber"]
+    globalConfigs.find_one_and_update({}, {'$set': {'teamNumber': teamNumber}})
+    return status.ok()
+
+def updateHostname(data: json):
+    """Update the current team number in the global config
+
+    Returns:
+        status: ok (see postman for example)
+    """
+    hostname = data["hostname"]
+    globalConfigs.find_one_and_update({}, {'$set': {'hostname': hostname}})
+    return status.ok()
+
+def updateUseStaticIP(data: json):
+    """Update the current setting for using static ip in the global config
+
+    Returns:
+        status: ok (see postman for example)
+    """
+    useStaticIP = data["useStaticIP"]
+    globalConfigs.find_one_and_update({}, {'$set': {'useStaticIP': useStaticIP}})
+    return status.ok()
+
+def updateStaticIP(data: json):
+    """Update the current static ip in the global config
+
+    Returns:
+        status: ok (see postman for example)
+    """
+    staticIP = data["staticIP"]
+    globalConfigs.find_one_and_update({}, {'$set': {'staticIP': staticIP}})
     return status.ok()
 
 # -----------------------------------------------------------------------------------------------------------------------------------------

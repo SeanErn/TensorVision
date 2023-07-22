@@ -5,10 +5,19 @@ from websocket.constants import *
 
 # -----------------------------------------------------------------------------------------------------------------------------------------
 
-# createPipeline
-def getCameraDevice(data: json):
+# createNewPipeline
+def createNewPipeline(data: json):
     pipelineName = data["pipelineName"]
-    dataFormatted = pipelines.find_one({"pipelineName": pipelineName}, {'cameraSettings.device': 1, '_id': 0})["cameraSettings"]
-    return status.ok_send_data(dataFormatted)
+    # THINGS TO DO
+    # copy pipeline from defaults to pipelines
+    # rename copied pipeline to pipelineName
+    # switch current pipeline in global config
     
 # -----------------------------------------------------------------------------------------------------------------------------------------
+
+# createNewModel
+def createNewModel(data: json):
+    modelName = data["modelName"]
+    # THINGS TO DO
+    # create new collection in files db named to model nickname
+    # encode and upload detect.tflite and label.pbtxt to collection
