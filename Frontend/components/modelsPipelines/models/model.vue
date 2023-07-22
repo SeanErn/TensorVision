@@ -11,14 +11,15 @@
             <!-- head -->
             <thead class="">
                 <tr class=" text-base">
+                    <th>#</th>
                     <th>Name</th>
                     <th>detect.tflite</th>
                     <th>label.pbtxt</th>
                 </tr>
             </thead>
             <tbody v-if="models">
-                <tr v-for="(model, index) in models" :key="index" @click="selectedModel = model.name"
-                    :class="{ 'bg-blue-200': selectedModel === model.name }">
+                <tr v-for="(model, index) in models" :key="index" @click="selectedModel === model.name ? selectedModel = '' : selectedModel = model.name"
+                    :class="{ 'bg-base-300': selectedModel === model.name }">
                     <th>{{ index }}</th>
                     <td>{{ model.name }}</td>
                     <td>{{ model.detect }}</td>
@@ -75,7 +76,15 @@
 
 <script setup lang="ts">
 
-const models = ref<{ name: string, detect: string, label: string }[] | undefined>();
+const models = ref<{ name: string, detect: string, label: string }[] | undefined>(
+    [
+        {
+            name: 'hello',
+            detect: 'detect.tflite',
+            label: 'label.pbtxt'
+        }
+    ]
+);
 const selectedModel = ref<string | undefined>();
 
 </script>
