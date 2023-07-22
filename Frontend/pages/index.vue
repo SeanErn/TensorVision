@@ -18,7 +18,10 @@
   </html>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+onMounted(() => {
+})
+
 const socket = new WebSocket("ws://127.0.0.1:5000");
 
 socket.addEventListener("open", (event) => {
@@ -34,9 +37,9 @@ socket.addEventListener("message", (event) => {
   console.log(event);
 });
 
-export default {
-  setup() {
-    provide('providedData', 'Hello from parent component')
-  }
-}
+// export default {
+//   setup() {
+//     provide('providedData', 'Hello from parent component')
+//   }
+// }
 </script>
