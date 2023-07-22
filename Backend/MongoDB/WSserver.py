@@ -28,6 +28,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             return wsStatus.failedParseRequest()
         # Use a case statement to handle different requests
         # GET
+        # pipelines
         if type == "getCameraDevice":
             return getCameraDevice(data)
         elif type == "getCameraExposure":
@@ -46,10 +47,24 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             return getYaw(data)
         elif type == "getPitch":
             return getPitch(data)
-        elif type == "getAll":
-            return getAll(data)
+        elif type == "getAllPipelineSettings":
+            return getAllPipelineSettings(data)
+        # globalConfigs
+        elif type == "getCurrentPipeline":
+            return getCurrentPipeline()
+        elif type == "getTeamNumber":
+            return getTeamNumber()
+        elif type == "getHostname":
+            getHostname()
+        elif type == "getUseStaticIp":
+            getUseStaticIp()
+        elif type == "getStaticIp":
+            getStaticIp()
+        elif type == "getGlobalConfig":
+            getGlobalConfig()
         
         # UPDATE
+        # pipelines
         elif type == "updateCameraDevice":
             return updateCameraDevice(data)
         elif type == "updateCameraExposure":
@@ -68,8 +83,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             return updateYaw(data)
         elif type == "updatePitch":
             return updatePitch(data)
-        elif type == "getCurrentPipeline":
-            return getCurrentPipeline()
+        
+        # errors
         else:
             return status.failedParseType()
 

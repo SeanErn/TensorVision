@@ -61,14 +61,40 @@ def getPitch(data: json):
 # -----------------------------------------------------------------------------------------------------------------------------------------
 
 # other
-def getAll(data: json):
+def getAllPipelineSettings(data: json):
     pipelineName = data["pipelineName"]
     dataFormatted = pipelines.find_one({"pipelineName": pipelineName}, {'_id': 0})
     return status.ok_send_data(dataFormatted)
+
+# -----------------------------------------------------------------------------------------------------------------------------------------
 
 # global
 def getCurrentPipeline():
     dataFormatted = globalConfigs.find_one({}, {'_id': 0, 'currentPipeline': 1})
     return status.ok_send_data(dataFormatted)
 
+# -----------------------------------------------------------------------------------------------------------------------------------------
+
 # networkConfig
+def getTeamNumber():
+    dataFormatted = globalConfigs.find_one({}, {'_id': 0, 'networkConfig.teamNumber': 1})
+    return status.ok_send_data(dataFormatted)
+
+def getHostname():
+    dataFormatted = globalConfigs.find_one({}, {'_id': 0, 'networkConfig.hostname': 1})
+    return status.ok_send_data(dataFormatted)
+
+def getUseStaticIp():
+    dataFormatted = globalConfigs.find_one({}, {'_id': 0, 'networkConfig.useStaticIP': 1})
+    return status.ok_send_data(dataFormatted)
+
+def getStaticIp():
+    dataFormatted = globalConfigs.find_one({}, {'_id': 0, 'networkConfig.staticIP': 1})
+    return status.ok_send_data(dataFormatted)
+
+# -----------------------------------------------------------------------------------------------------------------------------------------
+
+# other
+def getGlobalConfig():
+    dataFormatted = globalConfigs.find_one({}, {'_id': 0, 'currentPipeline': 1})
+    return status.ok_send_data(dataFormatted)
