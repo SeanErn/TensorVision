@@ -1,5 +1,5 @@
 # TODO:
-# Finish postman api docs
+# ✓ Finish postman api docs
 # Finish CREATE functions
 # Add notifications from server to client when the data on backend is updated
 # Attach to frontend
@@ -53,8 +53,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             return getYaw(data)
         elif type == "getPitch":
             return getPitch(data)
-        elif type == "getAllPipelineSettings":
-            return getAllPipelineSettings(data)
+        elif type == "getPipelineConfig":
+            return getPipelineConfig(data)
         # globalConfigs
         elif type == "getCurrentPipeline":
             return getCurrentPipeline()

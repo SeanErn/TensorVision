@@ -140,7 +140,7 @@ def getPitch(data: json):
 # -----------------------------------------------------------------------------------------------------------------------------------------
 
 # other
-def getAllPipelineSettings(data: json):
+def getPipelineConfig(data: json):
     """Get all the settings in the pipeline config
 
     Args:
