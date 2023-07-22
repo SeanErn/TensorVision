@@ -53,17 +53,17 @@ def updateMinimumConfidence(data: json):
 
 # -----------------------------------------------------------------------------------------------------------------------------------------
 
-# targetingOffsets
+# pipelineSettings.targetingOffsets
 def updateYaw(data: json):
     pipelineName = data["pipelineName"]
     yaw = data["yaw"]
-    pipelines.find_one_and_update({"pipelineName": pipelineName}, {'$set': {'targetingOffsets.yaw': yaw}})
+    pipelines.find_one_and_update({"pipelineName": pipelineName}, {'$set': {'pipelineSettings.targetingOffsets.yaw': yaw}})
     return status.ok()
 
 def updatePitch(data: json):
     pipelineName = data.pipelineName
     pitch = data["pitch"]
-    pipelines.find_one_and_update({"pipelineName": pipelineName}, {'$set': {'targetingOffsets.pitch': pitch}})
+    pipelines.find_one_and_update({"pipelineName": pipelineName}, {'$set': {'pipelineSettings.targetingOffsets.pitch': pitch}})
     return status.ok()
 
 # -----------------------------------------------------------------------------------------------------------------------------------------

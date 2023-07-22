@@ -1,9 +1,8 @@
 import tornado.web
 import tornado.websocket
 import tornado.ioloop
-import websocket.GET as wsGET
-import websocket.UPDATE as wsUPDATE
-import json
+from websocket.GET import *
+from websocket.UPDATE import *
 import websocket.status as wsStatus
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
@@ -25,17 +24,52 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         try:
             type = json.loads(message)["type"]
             data = json.loads(message)["data"]
-            print(type)
-            print(data)
         except:
             return wsStatus.failedParseRequest()
         # Use a case statement to handle different requests
-        if type == "updateCameraExposure":
-            return wsUPDATE.updateCameraExposure(data)
-        elif type == "getCameraDevice":
-            return wsGET.getCameraDevice(data)
+        # GET
+        if type == "getCameraDevice":
+            return getCameraDevice(data)
+        elif type == "getCameraExposure":
+            return getCameraExposure(data)
+        elif type == "getCameraBrightness":
+            return getCameraBrightness(data)
+        elif type == "getCameraAutoExposure":
+            return getCameraAutoExposure(data)
+        elif type == "getInputImageRotationMode":
+            return getInputImageRotationMode(data)
+        elif type == "getModel":
+            return getModel(data)
+        elif type == "getMinimumConfidence":
+            return getMinimumConfidence(data)
+        elif type == "getYaw":
+            return getYaw(data)
+        elif type == "getPitch":
+            return getPitch(data)
+        elif type == "getAll":
+            return getAll(data)
+        
+        # UPDATE
+        elif type == "updateCameraDevice":
+            return updateCameraDevice(data)
+        elif type == "updateCameraExposure":
+            return updateCameraExposure(data)
+        elif type == "updateCameraBrightness":
+            return updateCameraBrightness(data)
+        elif type == "updateCameraAutoExposure":
+            return updateCameraAutoExposure(data)
+        elif type == "updateInputImageRotationMode":
+            return updateInputImageRotationMode(data)
+        elif type == "updateModel":
+            return updateModel(data)
+        elif type == "updateMinimumConfidence":
+            return updateMinimumConfidence(data)
+        elif type == "updateYaw":
+            return updateYaw(data)
+        elif type == "updatePitch":
+            return updatePitch(data)
         else:
-            return wsStatus.failedParseType()
+            return status.failedParseType()
 
 def make_app():
     return tornado.web.Application([
