@@ -8,7 +8,12 @@
                 <HomeSelectorOptionsSelectorPipeline/>
                 <HomeSelectorOptionsSelectorModel/>
                 <HomeSelectorOptionsSelectorMinConfidence/>
-                
             </div>
 </div>
 </template>
+
+<script lang="ts">
+export default {
+  inject: ['providedData']
+}
+</script>
