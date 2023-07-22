@@ -27,6 +27,8 @@ function arm {
     # Run on startup via crontab
     echo "@reboot root mongod --dbpath /var/lib/mongo --logpath /var/log/mongodb/mongod.log --fork" | sudo tee -a /etc/crontab
 
+    python ./Backend/MongoDB/Install/setupDB.py
+
 }
 
 function x86 {
@@ -54,6 +56,8 @@ function x86 {
 
     # Run on startup via crontab
     echo "@reboot root mongod --dbpath /var/lib/mongo --logpath /var/log/mongodb/mongod.log --fork" | sudo tee -a /etc/crontab
+
+    python ./Backend/MongoDB/Install/setupDB.py
 }
 
 # Check flags and run apropriate mode
