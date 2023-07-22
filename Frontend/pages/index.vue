@@ -17,31 +17,3 @@
 
   </html>
 </template>
-
-<script setup lang="ts">
-onMounted(() => {
-})
-
-const socket = new WebSocket("ws://127.0.0.1:5803");
-
-socket.addEventListener("open", (event) => {
-  console.log("WebSocket connection opened:", event);
-  let payload = JSON.stringify({
-    type: "getAllPipelineSettings",
-    data: {
-      pipelineName: "default"
-    }
-  });
-  socket.send(payload);
-});
-
-socket.addEventListener("message", (event) => {
-  console.log(event);
-});
-
-// export default {
-//   setup() {
-//     provide('providedData', 'Hello from parent component')
-//   }
-// }
-</script>

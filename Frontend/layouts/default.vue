@@ -53,11 +53,9 @@
 
          </div>
       </aside>
-      <ClientOnly>
          <div class="overflow-x-scroll flex-grow bg-zinc-900 ">
             <slot />
 
          </div>
-      </ClientOnly>
    </div>
 </template>
