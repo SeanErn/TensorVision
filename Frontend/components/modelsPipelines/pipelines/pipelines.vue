@@ -37,11 +37,11 @@
     </div>
     <dialog id="addPipeline" class="modal">
         <form method="dialog" class="modal-box">
-            <h3 class="font-bold text-lg">Add Module</h3>
+            <h3 class="font-bold text-lg">Add Pipeline</h3>
             <hr class="my-2">
             <div class="form-control w-full max-w-xs">
                 <label class="label">
-                    <span class="label-text">Model Name</span>
+                    <span class="label-text">Pipeline Name</span>
                 </label>
                 <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
                 <label class="label">
@@ -49,21 +49,13 @@
             </div>
             <div class="form-control w-full max-w-xs">
                 <label class="label">
-                    <span class="label-text">Model - detect.tflite</span>
+                    <span class="label-text">Or, upload a config</span>
                 </label>
-                <input type="file" accept=".tflite"
-                    class="file-input file-input-bordered file-input-primary w-full max-w-xs" />
-            </div>
-            <div class="form-control w-full max-w-xs">
-                <label class="label">
-                    <span class="label-text">Model - label.pbtxt</span>
-                </label>
-                <input type="file" accept=".pbtxt"
-                    class="file-input file-input-bordered file-input-secondary w-full max-w-xs" />
+                <input type="file" accept=".json" class="file-input file-input-bordered file-input-secondary w-full max-w-xs" />
             </div>
             <div class="modal-action">
                 <!-- if there is a button in form, it will close the modal -->
-                <button class="btn btn-primary">Add Module</button>
+                <button class="btn btn-primary">Add Pipeline</button>
                 <button class="btn">
                     <svg class="w-[14px] h-[14px] text-gray-800 dark:text-white" aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">

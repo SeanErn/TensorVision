@@ -68,6 +68,8 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             return updateYaw(data)
         elif type == "updatePitch":
             return updatePitch(data)
+        elif type == "getCurrentPipeline":
+            return getCurrentPipeline()
         else:
             return status.failedParseType()
 

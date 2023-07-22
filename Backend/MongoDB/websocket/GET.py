@@ -58,9 +58,17 @@ def getPitch(data: json):
     dataFormatted = pipelines.find_one({"pipelineName": pipelineName}, {'pipelineSettings.targetingOffsets.pitch': 1, '_id': 0})["pipelineSettings"]["targetingOffsets"]
     return status.ok_send_data(dataFormatted)
 
+# -----------------------------------------------------------------------------------------------------------------------------------------
+
+# other
 def getAll(data: json):
     pipelineName = data["pipelineName"]
     dataFormatted = pipelines.find_one({"pipelineName": pipelineName}, {'_id': 0})
     return status.ok_send_data(dataFormatted)
 
-# -----------------------------------------------------------------------------------------------------------------------------------------
+# global
+def getCurrentPipeline():
+    dataFormatted = globalConfigs.find_one({}, {'_id': 0, 'currentPipeline': 1})
+    return status.ok_send_data(dataFormatted)
+
+# networkConfig
