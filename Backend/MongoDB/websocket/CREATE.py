@@ -10,6 +10,7 @@ def createNewPipeline(data: json):
     pipelineName = data["pipelineName"]
     # THINGS TO DO
     # copy pipeline from defaults to pipelines
+    defaults.find_one({}, {'_id': 0})
     # rename copied pipeline to pipelineName
     # switch current pipeline in global config
     
