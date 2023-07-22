@@ -9,11 +9,10 @@
                 <HomeSelectorOptionsSelectorModel/>
                 <HomeSelectorOptionsSelectorMinConfidence/>
             </div>
+            <p>{{ $pipelineConfig }}</p>
 </div>
 </template>
 
 <script lang="ts">
-export default {
-  inject: ['providedData']
-}
+const { $pipelineConfig } = useNuxtApp()
 </script>
