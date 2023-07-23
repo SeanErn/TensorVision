@@ -1,6 +1,7 @@
 # TODO:
 # ✓ Finish postman api docs
 # Finish CREATE functions
+# Files DB
 # Add notifications from server to client when the data on backend is updated
 # Attach to frontend
 
@@ -9,6 +10,7 @@ import tornado.websocket
 import tornado.ioloop
 from websocket.GET import *
 from websocket.UPDATE import *
+from websocket.CREATE import *
 import websocket.status as wsStatus
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
@@ -19,7 +21,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         print("WebSocket opened")
 
     def on_message(self, message):
-        print(message)
+        print("[Client → Server] "+ message)
         response = self.handle_request(message)
         self.write_message(response)
         
@@ -33,6 +35,16 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         except:
             return wsStatus.failedParseRequest()
         # Use a case statement to handle different requests
+        
+        #                    __ _       
+        #                   / _(_)      
+        #    ___ ___  _ __ | |_ _  __ _ 
+        #   / __/ _ \| '_ \|  _| |/ _` |
+        #  | (_| (_) | | | | | | | (_| |
+        #   \___\___/|_| |_|_| |_|\__, |
+        #                          __/ |
+        #                         |___/ 
+
         # GET
         # pipelines
         if type == "getCameraDevice":
@@ -61,16 +73,23 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
         elif type == "getTeamNumber":
             return getTeamNumber()
         elif type == "getHostname":
-            getHostname()
+            return getHostname()
         elif type == "getUseStaticIP":
-            getUseStaticIP()
+            return getUseStaticIP()
         elif type == "getStaticIP":
-            getStaticIP()
+            return getStaticIP()
         elif type == "getGlobalConfig":
-            getGlobalConfig()
-        
+            return getGlobalConfig()
+        # bulk
+        elif type == "getAllPipelineNames":
+            return getAllPipelineNames()
+        elif type == "getAllPipelineConfigs":
+            return getAllPipelineConfigs()
+            
         # UPDATE
         # pipelines
+        elif type == "updatePipelineName":
+            return updatePipelineName(data)
         elif type == "updateCameraDevice":
             return updateCameraDevice(data)
         elif type == "updateCameraExposure":
@@ -91,16 +110,20 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             return updatePitch(data)
         # globalConfigs
         elif type == "updateCurrentPipeline":
-            updateCurrentPipeline(data)
+            return updateCurrentPipeline(data)
         elif type == "updateTeamNumber":
-            updateTeamNumber(data)
+            return updateTeamNumber(data)
         elif type == "updateHostname":
-            updateHostname(data)
+            return updateHostname(data)
         elif type == "updateUseStaticIP":
-            updateUseStaticIP(data)
+            return updateUseStaticIP(data)
         elif type == "updateStaticIP":
-            updateStaticIP(data)
+            return updateStaticIP(data)
         
+        # CREATE
+        elif type == "createNewPipeline":
+            return createNewPipeline(data)
+            
         # errors
         else:
             return status.failedParseType()

@@ -37,9 +37,9 @@ def ok():
         }
     })
 
-def ok_send_data(data):
+def ok_send_data(type: str, data):
     return json.dumps({
-    "type": "ok",
+    "type": type,
     "code": "200",
     "data": data
     })

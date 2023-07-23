@@ -5,6 +5,20 @@ from websocket.constants import *
 
 # -----------------------------------------------------------------------------------------------------------------------------------------
 
+def updatePipelineName(data: json):
+    """Update the pipeline name set in the pipeline config 
+
+    Args:
+        data (json): The data from the websocket request
+        
+    Returns:
+        status: ok (see postman for example)
+    """
+    pipelineName = data["pipelineName"]
+    newPipelineName = data["newPipelineName"]
+    pipelines.find_one_and_update({"pipelineName": pipelineName}, {'$set': {'pipelineName': newPipelineName}})
+    return status.ok()
+
 # cameraSettings
 def updateCameraDevice(data: json):
     """Update the camera device set in the pipeline config 

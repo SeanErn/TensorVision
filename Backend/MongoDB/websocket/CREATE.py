@@ -10,9 +10,13 @@ def createNewPipeline(data: json):
     pipelineName = data["pipelineName"]
     # THINGS TO DO
     # copy pipeline from defaults to pipelines
-    defaults.find_one({}, {'_id': 0})
+    default = defaults.find_one({}, {'_id': 0})
+    pipelines.insert_one(default)
     # rename copied pipeline to pipelineName
+    pipelines.find_one_and_update({"pipelineName": "defaultPipelineConfig"}, {'$set': {'pipelineName': pipelineName}})
     # switch current pipeline in global config
+    globalConfigs.find_one_and_update({}, {'$set': {'currentPipeline': pipelineName}})
+    return status.ok()
     
 # -----------------------------------------------------------------------------------------------------------------------------------------
 
