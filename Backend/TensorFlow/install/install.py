@@ -2,100 +2,7 @@ import os
 import pathlib
 import importlib.util
 import subprocess
-
-
-
-# Install Miniconda3 if it doesn't already exist
-if not pathlib.Path(str(os.path.expanduser('~'))+'/miniconda3').exists():
-    print('[INSTALL] Installing miniconda3...')
-    os.system('wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh')
-    os.system('chmod +x Miniconda3-latest-Linux-x86_64.sh')
-    os.system('./Miniconda3-latest-Linux-x86_64.sh -b')
-    os.system('rm Miniconda3-latest-Linux-x86_64.sh')
-else:
-    print('[INFO] Miniconda3 already installed, skipping...')
-    
-# Create new conda environment if it doesn't already exist
-if not pathlib.Path(str(os.path.expanduser('~'))+'/miniconda3/envs/tfodforftc').exists():
-    print('Creating new conda environment...')
-    os.system('conda create -n tfodforftc python=3.7 -y')
-else:
-    print('Conda environment already exists')
-    
-# Require user to activate conda environment before continuing
-result = subprocess.run(['conda', 'info', '--envs'], stdout=subprocess.PIPE)
-output = result.stdout.decode('utf-8')
-env_lines = output.split('\n')
-env_name = None
-for line in env_lines:
-    if '*' in line:
-        env_name = line.split()[-1]
-        break
-
-# remove the path information and trailing slashes from the environment name, if it exists
-if env_name is not None:
-    env_name = os.path.basename(env_name).rstrip('/')
-
-# print the name of the active environment, if it exists
-if env_name is not None:
-    print('[ENV] Current environment: ', env_name)
-    if env_name != 'tfodforftc':
-        print('\033[0;31mPlease activate the tfodforftc environment before continuing')
-        print('To activate the environment, exit FTC-TFoD-Easy and run the following command:\033[00m')
-        print('"conda init bash"')
-        print('\033[0;31mThen restart your shell')
-        print('Finally, run \033[00m"conda activate tfodforftc" \033[0;31mand run the install script again.\033[00m')
-        print('Exiting...')
-        exit()
-else:
-    print("\033[0;31mNo active environment found.")
-    print('Unkown Error with CONDA')
-    print('Did you activate CONDA?')
-    print('To activate the environment, exit FTC-TFoD-Easy and run the following command:\033[00m')
-    print('"conda init bash"')
-    print('\033[0;31mThen restart your shell')
-    print('Finally, run \033[00m"conda activate tfodforftc" \033[0;31mand run the install script again.\033[00m')
-    print('Exiting...\033[00m')
-    exit()
-    
-
-# Install colorama
-print('Installing colorama...')
-os.system('pip install colorama')
 from colorama import Fore
-print(Fore.GREEN+'[SUCCESS] Colorama Initialized!')
-
-# Check if user has git apt package installed
-if not pathlib.Path('/usr/bin/git').exists():
-    print('Installing git...')
-    os.system('sudo apt-get update -y')
-    os.system('sudo apt-get install git -y')
-else:
-    print(Fore.YELLOW+'[INFO] Git already installed, skipping...')
-
-# Check if user has protobuf apt package installed
-if not pathlib.Path('/usr/bin/protoc').exists():
-    print(Fore.CYAN+'[INSTALL] Installing protobuf...')
-    os.system('sudo apt-get update -y')
-    os.system('sudo apt-get install protobuf-compiler -y')
-else:
-    print(Fore.YELLOW+'[INFO] Protobuf already installed, skipping...')
-
-# Check if user has wget apt package installed
-if not pathlib.Path('/usr/bin/wget').exists():
-    print(Fore.CYAN+'[INSTALL] Installing wget...')
-    os.system('sudo apt-get update -y')
-    os.system('sudo apt-get install wget -y')
-else:
-    print(Fore.YELLOW+'[INFO] Wget already installed, skipping...')
-
-# If gpu requirements aren't met, install them
-specCudaToolKit = importlib.util.find_spec('cudatoolkit')
-if specCudaToolKit is None:
-    print(Fore.CYAN+'[INSTALL] Installing cudatoolkit...')
-    os.system('conda install -c conda-forge cudatoolkit=10.0')
-else:
-    print(Fore.YELLOW+'[INFO] Cudatoolkit already installed, skipping...')
 
 if not pathlib.Path('./libcudnn7_7.4.1.5-1+cuda10.0_amd64.deb').exists():
     print(Fore.CYAN+'[INSTALL] Installing nvidia-cudnn...')
@@ -163,12 +70,5 @@ print(Fore.GREEN+'[SUCCESS] Object detection API installed successfully!')
 # print(Fore.LIGHTBLUE_EX+'[TEST] Running build test script...')
 # os.system('python object_detection/builders/model_builder_tf2_test.py')
 
-print(Fore.YELLOW+'[INFO] Installing Extra Packages...')
-os.system('pip install opencv-contrib-python')
-os.system('pip install numpy')
-os.system('pip install protobuf==3.20.*') # Downgrade protobuf to 3.20.* to avoid errors
-os.system('pip install keras==2.2.5') # Force lower version of keras to avoid errors
-os.system('pip install tensorboard==1.14.0') # Install tensorboard
-
-print(Fore.GREEN+'[SUCCESS] Installed Correctly!')
+print(Fore.GREEN+'[SUCCESS] Installed Correctly!'+Fore.WHITE)
 

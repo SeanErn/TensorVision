@@ -10,8 +10,9 @@ tf-slim
 six
 pycocotools
 lvis
-scipy
 pandas
-cython
-oldest-supported-numpy
-numpy
+numpy==1.21.6
+mjpeg_streamer
+tornado
+pymongo
+colorama
